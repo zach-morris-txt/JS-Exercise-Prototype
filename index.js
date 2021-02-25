@@ -63,7 +63,7 @@ Person.prototype.toString = function(){
   
   
   
-  
+
   /*
     TASK 2
       - Write a Car constructor that initializes `model` and `milesPerGallon` from arguments.
@@ -78,9 +78,15 @@ Person.prototype.toString = function(){
           + The `drive` method should return a string "I ran out of fuel at x miles!" x being `odometer`.
   */
   
- function Car() {
-    
-  }
+function Car(model, milesPerGallon){
+    this.model = model;
+    this.milesPerGallon = milesPerGallon;
+    this.tank = 0;
+    this.odometer = 0;
+}
+Car.prototype.fill = function(gallons){
+  return this.tank + gallons;
+}
   
   
   /*
@@ -90,18 +96,29 @@ Person.prototype.toString = function(){
       - Besides the methods on Person.prototype, babies have the ability to `.play()`:
           + Should return a string "Playing with x", x being the favorite toy.
   */
- function Baby() {
-   
-  }
+Baby.prototype = Person.prototype;
+function Baby(name, age, favoriteToy){
+  Person.call(this, name, age);
+   this.name = name;
+   this.age = age;
+   this.favoriteToy = favoriteToy;
+}
+Baby.prototype.play = function(){
+  return `Playing with ${this.favoriteToy}`;
+}
  
   
   /* 
     TASK 4
     In your own words explain the four principles for the "this" keyword below:
-    1. 
-    2. 
-    3. 
-    4. 
+    1. Global Scope/ Window Binding identifies 'this' as an implied value based on the availble global resources, or as undefined if strict (mode).
+
+    2. Implicit Binding works like a method in that it will bind and reference whatever is to the left of the dot (this.).
+
+    3. Explicit Binding utilizes the .call, .apply, and .bind methods to direct object reference and creation as well as argument passing. Each method here has it's own 
+    specific utility.
+
+    4. New Binding uses the "new" keyword to reference a new object (made by prototyping) at the point it is invoked.
   */
   
   
